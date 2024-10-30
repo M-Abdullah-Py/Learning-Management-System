@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Instructor Details</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Instructor Details</h1>
+
+        <!-- Instructor Details -->
+        <p><strong>Name:</strong> {{ instructor.name }} </p>
+        <p><strong>Bio:</strong> {{ instructor.bio }} </p>
+        <p><strong>User:</strong> {{ instructor.user.username }} </p>
+
+        <!-- Courses Taught Section -->
+        <h2>Courses Taught</h2>
+        <ul>
+            {% for course in instructor.courses.all %}
+            <li>
+                <!-- Course details here -->
+                <strong>Course Name:</strong> {{ course.name }}
+
+                <!-- Students Section -->
+                <h3>Students Enrolled</h3>
+                <ul>
+                    <!-- Loop through the students enrolled in each course here -->
+                    {% for student in course.students.all %}
+                    <li>
+                        <!-- Student details here -->
+                        {{ student.name }}
+                    </li>
+                    {% empty %}
+                    <li>No students enrolled in this course.</li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% empty %}
+            <li>No courses taught by this instructor.</li>
+            {% endfor %}
+        </ul>
+
+        <a href="#" class="btn btn-primary">Back to Instructor List</a>
+    </div>
+</body>
+</html>
